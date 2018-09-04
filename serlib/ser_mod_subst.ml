@@ -15,12 +15,9 @@
 
 open Sexplib
 
-type opaque = Opaqueproof.opaque
+type 'a substituted =
+  [%import: 'a Mod_subst.substituted]
 
-val sexp_of_opaque : opaque -> Sexp.t
-val opaque_of_sexp : Sexp.t -> opaque
+let sexp_of_substituted _ _ = Sexp.Atom "Substituted"
+let substituted_of_sexp _ _ = Obj.magic 0
 
-type opaquetab = Opaqueproof.opaquetab
-
-val sexp_of_opaquetab : opaquetab -> Sexp.t
-val opaquetab_of_sexp : Sexp.t -> opaquetab

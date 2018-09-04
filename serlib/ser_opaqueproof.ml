@@ -13,6 +13,11 @@
 (* Status: Experimental                                                 *)
 (************************************************************************)
 
+type opaque = [%import: Opaqueproof.opaque]
+
+let sexp_of_opaque = Serlib_base.sexp_of_opaque ~typ:"Opaqueproof.opaque"
+let opaque_of_sexp = Serlib_base.opaque_of_sexp ~typ:"Opaqueproof.opaque"
+
 type opaquetab = [%import: Opaqueproof.opaquetab]
 
 let sexp_of_opaquetab = Serlib_base.sexp_of_opaque ~typ:"Opaqueproof.opaquetab"

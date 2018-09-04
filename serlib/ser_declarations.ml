@@ -25,6 +25,9 @@ module Univ    = Ser_univ
 module Decl_kinds = Ser_decl_kinds
 module Vmvalues = Ser_vmvalues
 module Conv_oracle = Ser_conv_oracle
+module Mod_subst = Ser_mod_subst
+module Opaqueproof = Ser_opaqueproof
+module Cemitcodes = Ser_cemitcodes
 
 type template_arity =
   [%import: Declarations.template_arity]
@@ -97,8 +100,23 @@ type record_info =
   [%import: Declarations.record_info]
   [@@deriving sexp]
 
+type inline =
+  [%import: Declarations.inline]
+  [@@deriving sexp]
+
+type constant_universes =
+  [%import: Declarations.constant_universes]
+  [@@deriving sexp]
+
+type constant_def =
+  [%import: Declarations.constant_def]
+  [@@deriving sexp]
+
+type constant_body =
+  [%import: Declarations.constant_body]
+  [@@deriving sexp]
+
 type mutual_inductive_body =
   [%import: Declarations.mutual_inductive_body
   [@with Context.section_context := Context.Named.t;]]
   [@@deriving sexp]
-

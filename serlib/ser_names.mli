@@ -102,6 +102,24 @@ module Constant : sig
 
 end
 
+module Cset_env : sig
+
+  type t = Names.Cset_env.t
+
+  val t_of_sexp : Sexp.t -> t
+  val sexp_of_t : t -> Sexp.t
+
+end
+
+module Cmap_env : sig
+
+  type 'a t = 'a Names.Cmap_env.t
+
+  val t_of_sexp : (Sexp.t -> 'a) -> Sexp.t -> 'a t
+  val sexp_of_t : ('a -> Sexp.t) -> 'a t -> Sexp.t
+
+end
+
 module MutInd : sig
 
   type t = Names.MutInd.t

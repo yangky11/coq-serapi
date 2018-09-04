@@ -14,6 +14,7 @@
 (************************************************************************)
 
 open Sexplib.Std
+open Sexplib.Conv
 
 module Range  = Ser_range
 module Names  = Ser_names
@@ -38,8 +39,29 @@ type named_context_val =
   [%import: Environ.named_context_val]
   [@@deriving sexp_of]
 
+type link_info =
+  [%import: Environ.link_info]
+  [@@deriving sexp]
+
+module Stdlib = struct
+
+  type nonrec 'a ref = 'a ref
+  let ref_of_sexp = Sexplib.Std.ref_of_sexp
+  let sexp_of_ref = Sexplib.Std.sexp_of_ref
+
+end
+
+type key =
+  [%import: Environ.key]
+  [@@deriving sexp]
+
+type constant_key =
+  [%import: Environ.constant_key]
+  [@@deriving sexp]
+
 type globals =
   [%import: Environ.globals]
+  [@@deriving sexp]
 
 let sexp_of_globals = Serlib_base.sexp_of_opaque ~typ:"Environ.globals"
 

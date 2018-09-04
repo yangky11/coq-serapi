@@ -164,6 +164,35 @@ let sexp_of_t dp   = sexp_of__constant (_constant_put dp)
 
 end
 
+module Cset_env = struct
+
+  type t =
+    [%import: Names.Cset_env.t]
+
+  let t_of_sexp de =
+    let ofl = list_of_sexp Constant.t_of_sexp de in
+    let open Names.Cset_env in
+    List.fold_left (fun set elt -> add elt set) empty ofl
+
+  let sexp_of_t de =
+    sexp_of_list Constant.sexp_of_t Names.Cset_env.(elements de)
+
+end
+
+module Cmap_env = struct
+
+  type 'a t =
+    [%import: 'a Names.Cmap_env.t]
+
+  let t_of_sexp f sexp =
+    List.fold_left (fun e (k,s) -> Cmap_env.add k s e) Cmap_env.empty
+      (list_of_sexp (Sexplib.Conv.pair_of_sexp Constant.t_of_sexp f) sexp)
+
+  let sexp_of_t f cst =
+    sexp_of_list (Sexplib.Conv.sexp_of_pair Constant.sexp_of_t f) (Cmap_env.bindings cst)
+
+end
+
 module MutInd = struct
 
 (* MutInd.t: private *)
@@ -220,7 +249,8 @@ type projection = Projection.t
 
 module GlobRef = struct
 
-type t = [%import: Names.GlobRef.t]
+type t =
+  [%import: Names.GlobRef.t]
   [@@deriving sexp]
 
 end
