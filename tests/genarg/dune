@@ -35,6 +35,11 @@
 
 (alias
  (name runtest)
+ (deps (:input case.v))
+ (action (run ./test_roundtrip %{input})))
+
+(alias
+ (name runtest)
  (deps (:input clear.v))
  (action (run ./test_roundtrip %{input})))
 
@@ -43,11 +48,10 @@
  (deps (:input eauto.v))
  (action (run ./test_roundtrip %{input})))
 
-; Broken
-; (alias
-;  (name runtest)
-;  (deps (:input elim.v))
-;  (action (run ./test_roundtrip %{input})))
+(alias
+ (name runtest)
+ (deps (:input elim.v))
+ (action (run ./test_roundtrip %{input})))
 
 (alias
  (name runtest)
@@ -109,6 +113,11 @@
 ;  (name runtest)
 ;  (deps (:input move.v))
 ;  (action (run ./test_roundtrip %{input})))
+
+(alias
+ (name runtest)
+ (deps (:input move.v))
+ (action (run ./test_roundtrip %{input})))
 
 (alias
  (name runtest)
